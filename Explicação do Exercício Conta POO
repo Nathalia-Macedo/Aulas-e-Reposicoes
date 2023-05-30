@@ -1,0 +1,53 @@
+#Criando a classe conta
+class Conta:
+    def __init__(self,nome):#Instanciando (começando a jogar no molde) o objeto. Dentro dos parênteses vão os parâmetros, que são os atributos, as características daquela classe.
+        self.nome = nome #self significa auto. Então é o seu próprio nome, seu próprio saldo.
+        self.__saldo = 500# A questão pedia que o saldo fosse privado, para isso, precisamos colocar dois underlines após o self.
+#dentro dos parenteses do init, colocamos primeiro sempre o self, e depois os parametros que precisamos pedir ao usuário . Se não
+#precisa pedir ao usuario, simplesmente crie o self.(atributo que voce quer criar) = o valor dele;  
+
+
+    #criando um método (criando os comportamentos que essa classe tem). No método sempre temos o self dentro do parâmetro.
+    def consultar_saldo(self):#Depois basta se fazer valer da lógica e criar aquilo que a função faz.
+        print(f"O seu saldo é de {self.__saldo} ") #lembre-se de sempre passar os atributos do mesmo jeito que os criou lá em cima na classe
+        # nesse caso, o método pede apenas para mostrar o saldo;
+
+
+
+    #Criando o método (um comportamento).
+    def depositar(self):
+        #para depositar, primeiro precisamos saber o valor que o cliente quer depositar na conta, então esse é o primeiro passo.
+        valor_depositado = float(input("Digite quanto gostaria de depositar: "))
+        #Depois, precisamos além de fazer o depósito, mudar o valor do saldo.
+        self.__saldo = self.saldo + valor_depositado
+        #Mostrar uma mensagem dizendo que o deposito foi realizado com sucesso;
+        print(f"valor depositado com sucesso! seu novo saldo é de {self.__saldo}")
+
+    #criando um método (um comportamento) nunca se esqueca de passar o self como parametro e os dois pontos logo após ele.
+    def sacar(self):
+        #para sacar, precisamos saber quanto queremos retirar da conta.
+        valor_do_saque = float(input("Digite quanto voce quer sacar: "))
+        #Mas e se quisermos sacar mais do que temos no nosso saldo? para evitar isso, precisamos de uma condicao:
+        if valor_do_saque>self.__saldo:
+            print("Saldo insuficiente!")
+        #Mas caso esse não seja o caso...
+        else:
+            #precisamos realizar o saque. O valor do saque precisa diminuir;
+            self.__saldo = self.__saldo - valor_do_saque
+            #E de preferencia sempre mostrar uma mensagem caso a operação seja realizada;
+            print(f"Valor sacado com sucesso! Novo saldo {self.__saldo}")
+
+
+    def transferir(self):
+        #Para fazer uma transferencia, precisamos primeiro escolher pra quem vamos transferir;
+        pessoa = input("Digite o nome da pessoa para quem gostaria de transferir o dinheiro: ")
+        #Depois disso, precisamos dizer o valor a ser transferido:
+        valor_a_ser_transferido = float(input("Digite o valor que gostaria de transferir: "))
+        #Mas e se o valor que o usuario quer transferir seja maior do que o saldo dele?
+        if valor_a_ser_transferido>self.__saldo:
+            print("SALDO INSUFICIENTE")
+            #Caso contrario...:
+        else:
+            self.__saldo = self.__saldo - valor_a_ser_transferido
+            print(f" A transferência para {pessoa} foi realizada com sucesso! ")
+
